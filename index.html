@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>House Chore Rotations!</title>
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <script type="text/x-handlebars">
+    {{#link-to 'index' tagName='h1'}}The Chore Rotator!{{/link-to}}
+    {{outlet}}
+  </script>
+
+  <script type="text/x-handlebars" id="index">
+    <b>{{#link-to 'chores'}}Chores{{/link-to}}</b>
+    <b>{{#link-to 'residents'}}Residents{{/link-to}}</b>
+  </script>
+  <script type="text/x-handlebars" id="chores">
+    <h2>Chore List</h2>
+    <p>These are the chores in your house</p>
+    {{#each item in model}}
+    <ul>
+      {{#link-to 'chore' item tagName='a'}}
+        {{item.name}}
+      {{/link-to}}
+    </ul>
+    {{/each}}
+  </script>
+  <script type="text/x-handlebars" id="chore">
+    <h2>{{name}}</h2>
+    <p><i>Frequency: {{frequency}}</i></p>
+    <p>{{description}}</p>
+  </script>
+  <script type="text/x-handlebars" id="residents">
+    <h2>Chore List</h2>
+    <p>These are your listed residents</p>
+    {{#each resident in model}}
+    <ul>
+      {{#link-to 'resident' resident tagName='a'}}
+        {{resident.name}}
+      {{/link-to}}
+    </ul>
+    {{/each}}
+  </script>
+  <script type="text/x-handlebars" id="resident">
+    <h2>{{name}}</h2>
+    <p>Preferred chores:</p>
+    {{#each chore in model.firstChoices}}
+    <ul>
+      {{#link-to 'chore' chore tagName='a'}}
+        {{chore}}
+      {{/link-to}}
+    </ul>
+    {{/each}}
+  </script>
+  
+  <script src="js/libs/jquery-1.10.2.js"></script>
+  <script src="js/libs/handlebars-v1.3.0.js"></script>
+  <script src="js/libs/ember-1.8.1.js"></script>
+  <script src="js/app.js"></script>
+  <!-- to activate the test runner, add the "?test" query string parameter -->
+  <script src="tests/runner.js"></script>
+</body>
+</html>
