@@ -19,7 +19,8 @@ App.ChoresRoute = Ember.Route.extend({
 });
 App.ChoreRoute = Ember.Route.extend({
     model: function(params) {
-        return App.CHORES.findBy('name', params.name);
+        var chore = App.CHORES.findBy('name', params.name);
+        return chore == null ? {} : chore;
     }
 });
 App.ResidentsRoute = Ember.Route.extend({
